@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/jkeen/tracking_number
+  revision: 76921e1fbec75479ac84d762d5bb0ed796123969
+  specs:
+    tracking_number (0.10.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -175,6 +181,7 @@ DEPENDENCIES
   simple_form
   spring
   sqlite3
+  tracking_number!
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)

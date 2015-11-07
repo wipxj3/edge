@@ -31,6 +31,7 @@ class TracksController < ApplicationController
 
   def destroy
     @track = Track.find(params[:id])
+    @track.statuses.each(&:destroy!)
     @track.destroy!
 
     redirect_to tracks_path

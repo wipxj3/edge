@@ -1,5 +1,9 @@
-<h1> New Tracking</h1>
-<%= form_for @track do |form| %>
-<%= form.text_field :link, :placeholder => "Insert link"  %>
-<%= form.submit %>
-<% end %>
+<div class="container">
+  <div class="col-lg-4">
+    <h1> New Tracking</h1>
+    <%= simple_form_for @track do |form| %>
+      <%= form.input  :link, :placeholder => "Insert link"  %>
+      <%= form.button :submit %>
+    <% end %>
+  </div>
+</div>

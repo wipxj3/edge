@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   root to: "tracks#index"
-
   resources :tracks
 
+  get "landing" => "pages#landing"
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

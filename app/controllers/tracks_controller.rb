@@ -9,9 +9,8 @@ class TracksController < ApplicationController
   end
 
   def create
-    @track=Track.create(track_params)
-    @track.user = current_user
-    @track.save
+    @track = current_user.tracks.create!(track_params)
+    @track.get_status!
 
     redirect_to tracks_path
   end
@@ -23,7 +22,8 @@ class TracksController < ApplicationController
   def update
     @track = Track.find(params[:id])
     if @track.update_attributes(track_params)
-      redirect_to track_path
+      @track.get_status!
+      redirect_to tracks_path
     else
       render 'edit'
     end
@@ -31,7 +31,7 @@ class TracksController < ApplicationController
 
   def destroy
     @track = Track.find(params[:id])
-    @track.destroy
+    @track.destroy!
 
     redirect_to tracks_path
   end

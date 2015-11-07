@@ -11,11 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107142320) do
+ActiveRecord::Schema.define(version: 20151107162017) do
+
+  create_table "statuses", force: :cascade do |t|
+    t.string   "name",       default: "unknown"
+    t.integer  "track_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "statuses", ["track_id"], name: "index_statuses_on_track_id"
 
   create_table "tracks", force: :cascade do |t|
-    t.string  "link"
+    t.string  "number"
     t.integer "user_id"
+    t.string  "carrier"
   end
 
   create_table "users", force: :cascade do |t|

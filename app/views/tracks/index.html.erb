@@ -25,12 +25,12 @@
         <li>
             <div class="panel panel-default">
             <div class="panel-body">
-                <%= link_to(track.link) %>
+                <%= link_to(track.number) %>
             </div>
             <div class="panel-footer">
-                <span class="label label-default">
-                    <%= "Posted by "+ track.user.email %>
-                </span>
+            <span class="label label-default">
+                <%= "Carrier: "+ track.carrier + " | Status: "+ track.statuses.last.name%>
+            </span>
                 <% if current_user == track.user %>
                     <%= link_to(track_path(track), method: :delete, class: 'btn btn-danger btn-xs pull-right') do %>
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete

@@ -33,16 +33,16 @@
 
             <% if current_user == track.user %>
                 <%= link_to(track_path(track), method: :delete, class: 'btn btn-danger btn-xs pull-right') do %>
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                  Delete
                 <% end %>
 
                 <%= link_to(edit_track_path(track), class: 'btn btn-default btn-xs pull-right') do %>
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+                  Edit
                 <% end %>
 
                 <% if track.number == "EZ1000000001" %>
                   <%= link_to(track_refresh_path(track), class: 'btn btn-info btn-xs pull-right') do %>
-                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Refresh Status
+                    Refresh Status
                   <% end %>
                 <% end %>
 

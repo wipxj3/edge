@@ -1,47 +1,60 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Edge Tracking</a>
-    </div>
-
-    <div class="navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li>
-          <%=link_to("New Tracking", new_track_path) %>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <%= link_to("Logout", destroy_user_session_path, :method => :delete) %>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<%= render "shared/navbar" %>
 
 <div class="container">
+  <div class="alert alert-warning" role="alert">
+    <strong>Warning!</strong> For testing purpose use "EZ1000000001" tracking number.
+  </div>
+  <div class="alert alert-info" role="alert">
+    <strong>Note!</strong> A list of REAL tracking numbers "RS330079740NL", "EJ958083578US".
+  </div>
     <ul>
-        <% Track.all.each do |track| %>
+      <% @tracks.all.each do |track| %>
         <li>
-            <div class="panel panel-default">
-            <div class="panel-body">
-                <%= link_to(track.number) %>
-            </div>
-            <div class="panel-footer">
-            <span class="label label-default">
-                <%= "Carrier: "+ track.carrier + " | Status: "+ track.statuses.last.name%>
-            </span>
-                <% if current_user == track.user %>
-                    <%= link_to(track_path(track), method: :delete, class: 'btn btn-danger btn-xs pull-right') do %>
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
-                    <% end %>
+          <div class="panel panel-default">
+          <div class="panel-body">
+            <%= link_to(track.number) %>
+            <p class="lead pull-right">
+              <%= "Last message: " + track.statuses.last.message %>
+            </p>
+          </div>
+          <div class="panel-footer">
 
-                    <%= link_to(edit_track_path(track), class: 'btn btn-default btn-xs pull-right') do %>
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
-                    <% end %>
+            <span class="label label-default">
+              <%= "Carrier: "+ track.carrier %>
+            </span>
+
+            <% if track.statuses.last.name == "delivered" %>
+              <span class="label label-success label-xm">
+            <% else %>
+              <span class="label label-primary label-xm">
+            <% end %>
+              <%= "Status: "+ track.statuses.last.name %>
+            </span>
+
+            <% if current_user == track.user %>
+                <%= link_to(track_path(track), method: :delete, class: 'btn btn-danger btn-xs pull-right') do %>
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
                 <% end %>
-            </div>
+
+                <%= link_to(edit_track_path(track), class: 'btn btn-default btn-xs pull-right') do %>
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+                <% end %>
+
+                <% if track.number == "EZ1000000001" %>
+                  <%= link_to(track_refresh_path(track), class: 'btn btn-info btn-xs pull-right') do %>
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Refresh Status
+                  <% end %>
+                <% end %>
+
+            <% end %>
+          </div>
         </li>
-        <% end %>
+      <% end %>
     </ul>
 </div>
+
+<div class="pagination-container">
+  <%= paginate @tracks, theme: "twitter-bootstrap-3" %>
+</div>
+
+<%= render "shared/footer" %>
